@@ -28,6 +28,9 @@ div#circle{
     }
  
 }
+a{
+    text-decoration: none;
+}
 i{
     padding-left: 7px;
 }

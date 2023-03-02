@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 div#circle{
-    animation: background 2s infinite forwards ease-in-out;
+    animation: background 2s infinite forwards ease-in;
     box-shadow: 2px 2px 20px #1f1;
 }
 
@@ -12,19 +12,30 @@ div#circle{
         box-shadow: 2px 2px 20px #1f1;
     }
     20%{
-        box-shadow: 5px 5px 40px #1f1;
+        box-shadow: 5px 5px 40px #ffee01;
     }
     40%{
-        box-shadow: 7px 7px 60px #1f1;
+        box-shadow: 7px 7px 60px #0FC0FC;
     }
     60%{
         box-shadow: 8px 8px 80px #1f1;
     }
     80%{
-        box-shadow: 10px 10px 40px #1f1;
+        box-shadow: 10px 10px 40px #ffee00;
     }
     100%{
-        box-shadow: 4px 4px 20px #1f1;
+        box-shadow: 4px 4px 20px #0FC0FC;
     }
  
+}
+i{
+    padding-left: 7px;
+}
+i:hover{
+    color: #1f1;
+    text-shadow: 2px 2px 20px #1f1;
+
+}
+footer{
+    box-shadow: 0px 0px 4px #1f1;
 }

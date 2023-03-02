@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <title>Timer</title>
+</head>
+<body class="bg-[#111]">
+
+    <a href="index.html"><button class="bg-[#111] hover:bg-green-600 my-2 mx-3 text-white active:bg-blue-500 p-2 px-4 text-xl border border-1 font-semibold">Back to Home</button></a>
+
+    <div class="flex flex-col my-3 text-white">
+        <h1 class="text-center text-[4rem] text-white font-semibold">Set Time</h1>
+
+        <div oninput="displayMin()" class="bg-transparent my-2 mb-12 text-white text-center">
+            <input type="number" class="bg-transparent p-1 w-32 border" id="minutes" min="0" max="59" placeholder="mins"/><span class="text-3xl px-4">:</span>
+            <input type="number" class="bg-transparent p-1 w-32 border" id="seconds" min="0" max="59" placeholder="secs"/>
+        </div>
+
+        <div id="circle" class="bg-transparent text-white w-[80vw] h-[80vw] md:w-[35vw] md:h-[35vw] lg:w-[20vw] lg:h-[20vw] m-auto rounded-full flex flex-col justify-evenly">
+            <p id="display" class="text-center text-[4.5rem]">00:00</p>
+        </div>
+
+        <div class="w-[20vw] justify-center flex m-auto mt-14 gap-5">
+            <button id="start" onclick="startTimer()" class="bg-[#111] hover:bg-green-600 active:bg-green-700 p-2 px-4 text-xl border border-1 font-semibold">Start</button>
+            <button id="pause" onclick="pauseTimer()" class="bg-[#111] hover:bg-red-500 active:bg-red-700 p-2 px-4 text-xl border border-1 font-semibold">Pause</button>
+            <button id="reset" onclick="resetTimer()" class="bg-[#111] hover:bg-yellow-300 hover:text-black active:bg-yellow-500 active:text-black text-2xl font-semibold border border-1 p-2 px-4">Reset</button>
+        </div>
+
+    </div>
+
+    <!-- footer Section -->
+    <footer class="text-center text-yellow-300 p-2">
+        <p class="text-xl">Designed & Developed by Gaurav</p>
+        <div class="flex justify-center text-white text-2xl">
+          <a href="https://github.com/gauravmad" target="_blank">
+            <i class="ri-github-fill" class=""></i>
+          </a>
+          <a href="https://instagram.com/gauravmadan2004?igshid=ZDdkNTZiNTM=" target="_blank">
+            <i class="ri-instagram-fill" class=""></i>
+          </a>
+          <a href="https://www.linkedin.com/in/gaurav-madan-b25009229/" target="_blank">
+            <i class="ri-linkedin-box-fill"></i>
+          </a>
+        </div>
+    </footer>
+
+    <script>
+        let minutes = document.getElementById("minutes");
+        let seconds = document.getElementById("seconds");
+        let display = document.getElementById("display");
+        let start = document.getElementById("start");
+        let pause = document.getElementById("pause");
+        let reset = document.getElementById("reset");
+        let timer;
+        let totalSeconds = 0;
+        
+        function displayMin() {
+            display.innerHTML = 
+                (minutes.value < 10 ? "0" + minutes.value : minutes.value) 
+                + ":" + 
+                (seconds.value < 10 ? "0" + seconds.value : seconds.value);
+            totalSeconds = minutes.value * 60 + parseInt(seconds.value);
+        }
+        
+        function startTimer() {
+            start.disabled = true;
+            pause.disabled = false;
+            reset.disabled = false;
+            timer = setInterval(() => {
+                if (totalSeconds === 0) {
+                    clearInterval(timer);
+                    let audio = new Audio("timer audio.mp3");
+                    audio.play();
+                } else {
+                    totalSeconds--;
+                    let minutesDisplay = Math.floor(totalSeconds / 60);
+                    let secondsDisplay = totalSeconds - minutesDisplay * 60;
+                    display.innerHTML = 
+                        (minutesDisplay < 10 ? "0" + minutesDisplay : minutesDisplay) 
+                        + ":" + 
+                        (secondsDisplay < 10 ? "0" + secondsDisplay : secondsDisplay);
+                }
+            }, 1000);
+        }
+        
+        function pauseTimer() {
+            start.disabled = false;
+            pause.disabled = true;
+            reset.disabled = false;
+            clearInterval(timer);
+        }
+        
+        function resetTimer() {
+            start.disabled = false;
+            pause.disabled = true;
+            reset.disabled = true;
+            clearInterval(timer);
+            display.innerHTML = "00:00";
+            minutes.value = "";
+            seconds.value = "";
+        }
+    </script>
+</body>
+</html>

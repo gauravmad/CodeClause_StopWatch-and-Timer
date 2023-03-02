@@ -6,6 +6,10 @@ div#circle{
     animation: background 2s infinite forwards ease-in;
     box-shadow: 2px 2px 20px #1f1;
 }
+div.circle{
+    animation: background 2s infinite forwards ease-in;
+    box-shadow: 2px 2px 20px #1f1;
+}
 
 @keyframes background {
     0%{
